@@ -45,13 +45,15 @@ def call(Map params){
 					sh 'docker run my-app'
 				}
 			}
-			steps {
-				script{
-					withCredentials([
-						string(credentialsId: 'telegramToken', variable: 'TOKEN'),
-						string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')
-					]) {
-							telegramSend(messsage:"test message", chatId:${CHAT_ID})
+			stage('Notify telegram bot') {
+				steps {
+					script {
+						withCredentials ([
+							string(credentialsId: 'telegramToken', variable: 'TOKEN'),
+							string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')
+						]) {
+								telegramSend(messsage:"test message", chatId:${CHAT_ID})
+						}
 					}
 				}
 			}
