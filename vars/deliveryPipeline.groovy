@@ -1,21 +1,20 @@
 #!/usr/bin/env groovy
 
-def branch = "${env.BRANCH_NAME}"
-
-def getAgent(Map params){
-	// echo "Deploying branch ${branch}"
-	// if (branch == "master"){
-	// 	echo "Deploying on agent ${params.type}-master"
-	// 	return "${params.type}-master"
-	// }
+def getAgent(Map params, String branch){
+	echo "Deploying branch ${branch}"
+	if (branch == "master"){
+		echo "Deploying on agent ${params.type}-master"
+		return "${params.type}-master"
+	}
 	echo "Deploying on agent ${params.type}-nm"
 	return "${params.type}-nm"
 }
 
 def call(Map params){
+	def branch = "${env.BRANCH_NAME}"
 	pipeline {
 		agent {
-			label getAgent(params)
+			label getAgent(params,branch)
 		}
 		stages {
 			stage('Build') {
