@@ -48,7 +48,7 @@ def call(Map params){
 				steps {
 					script {
 						def commiter = sh(script: "git show -s --pretty=%cn", returnStdout: true).trim()
-						telegramSend '${commiter} push to branch ${branch}\nBuild success.'
+						telegramSend "${commiter} push to branch ${branch}\nBuild success."
 					}
 				}
 			}
