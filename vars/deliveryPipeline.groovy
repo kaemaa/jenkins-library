@@ -1,9 +1,19 @@
 #!/usr/bin/env groovy
 
+def env = "${env.BRANCH_NAME}"
+
+def getAgent(Map params){
+	if (env == "master"){
+		return "${params.type}-master"
+	} else {
+		return "${params.type}-nm"
+	}
+}
+
 def call(Map params){
 	pipeline {
 		agent {
-			label "${params.type}-${params.env}"
+			label getAgent(params)
 		}
 		stages {
 			stage('Build') {
