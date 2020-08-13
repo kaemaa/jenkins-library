@@ -51,7 +51,7 @@ def call(Map params){
 							string(credentialsId: 'telegramToken', variable: 'TOKEN'),
 							string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')
 						]) {
-								telegramSend(messsage:"test message", chatId: "${CHAT_ID}")
+								telegramSend(messsage: 'deploy berhasil', chatId: ${CHAT_ID})
 						}
 					}
 				}
