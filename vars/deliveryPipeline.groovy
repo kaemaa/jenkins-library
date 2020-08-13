@@ -45,7 +45,11 @@ def call(Map params){
 				}
 			}
 			stage('Notify telegram bot') {
-				telegramSend 'Hello world'
+				steps {
+					script {
+						telegramSend 'Hello world'
+					}
+				}
 			}
 		}
 		post {
