@@ -11,7 +11,10 @@ def getAgent(Map params, String branch){
 }
 
 def call(Map params){
+
 	def branch = "${env.BRANCH_NAME}"
+	def CHAT_ID = "-341689175"
+
 	pipeline {
 		agent {
 			label getAgent(params,branch)
@@ -40,6 +43,16 @@ def call(Map params){
 			stage('Run app') {
 				steps {
 					sh 'docker run my-app'
+				}
+			}
+			steps {
+				script{
+					withCredentials([
+						string(credentialsId: 'telegramToken', variable: 'TOKEN'),
+						string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')
+					]) {
+							telegramSend(messsage:"test message", chatId:${CHAT_ID})
+					}
 				}
 			}
 		}
