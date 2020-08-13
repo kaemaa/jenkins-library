@@ -45,16 +45,7 @@ def call(Map params){
 				}
 			}
 			stage('Notify telegram bot') {
-				steps {
-					script {
-						withCredentials ([
-							string(credentialsId: 'telegramToken', variable: 'TOKEN'),
-							string(credentialsId: 'telegramChatId', variable: 'CHAT_ID')
-						]) {
-								telegramSend(messsage: 'deploy berhasil', chatId: ${CHAT_ID})
-						}
-					}
-				}
+				telegramSend 'Hello world'
 			}
 		}
 		post {
