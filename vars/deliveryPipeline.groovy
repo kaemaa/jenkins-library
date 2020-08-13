@@ -1,9 +1,10 @@
 #!/usr/bin/env groovy
 
-def env = "${env.BRANCH_NAME}"
+def branch = "${env.BRANCH_NAME}"
 
 def getAgent(Map params){
-	if (env == "master"){
+	echo "Deploying branch ${branch}"
+	if (branch == "master"){
 		echo "Deploying on agent ${params.type}-master"
 		return "${params.type}-master"
 	}
