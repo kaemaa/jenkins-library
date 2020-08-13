@@ -4,10 +4,11 @@ def env = "${env.BRANCH_NAME}"
 
 def getAgent(Map params){
 	if (env == "master"){
+		echo "Deploying on agent ${params.type}-master"
 		return "${params.type}-master"
-	} else {
-		return "${params.type}-nm"
 	}
+	echo "Deploying on agent ${params.type}-nm"
+	return "${params.type}-nm"
 }
 
 def call(Map params){
