@@ -46,8 +46,8 @@ def call(Map params){
 			}
 			stage('Notify telegram bot') {
 				steps {
-					def commiter = sh(script: "git show -s --pretty=%cn", returnStdout: true).trim()
 					script {
+						def commiter = sh(script: "git show -s --pretty=%cn", returnStdout: true).trim()
 						telegramSend '${commiter} push to branch ${branch}\nBuild success.'
 					}
 				}
